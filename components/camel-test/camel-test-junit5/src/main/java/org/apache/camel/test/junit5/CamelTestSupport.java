@@ -332,7 +332,7 @@ public abstract class CamelTestSupport
     public void setUp() throws Exception {
         testStartHeader(getClass(), currentTestName);
 
-        ExtensionHelper.hasUnsupported(getClass());
+        assertUnsupported();
 
         if (isCreateCamelContextPerClass) {
             createCamelContextPerClass();
@@ -343,6 +343,10 @@ public abstract class CamelTestSupport
 
         // only start timing after all the setup
         watch.restart();
+    }
+
+    protected void assertUnsupported() {
+        ExtensionHelper.hasUnsupported(getClass());
     }
 
     private void createCamelContextPerClass() throws Exception {
